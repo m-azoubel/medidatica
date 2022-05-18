@@ -1,0 +1,19 @@
+Alteração{ //Fez alguma alteração
+
+    git add .
+    // No "git add ." adicionamos todas as mudanças ao arquivo de commit
+
+    git commit -m "[mensagem]"
+    [mensagem] = Verbo da ação (Ex: Edit, Add, Removed, Fix) + arquivo que sofreu a ação
+    //Commitar introduz uma mensagem ao arquivo que vai ser enviado ao repositório
+
+    git push
+    //Envia o arquivo ao repositório
+}
+
+Alterado{ //Alguém fez alguma alteração
+
+    git pull
+    //Recebe o arquivo do repositório atualizado
+
+}
