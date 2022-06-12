@@ -8,54 +8,59 @@
 //Funções necessárias
 typedef struct Users
 {
-    char name[50];
     char cpf[11];
     int userType;
-    struct Users* nUser;    
+    int isActive;
 }User;
+
+int usersResgistereds = 0;
 
 //--------------------------------------------------------------------------//
 //---------------------------Função de adição-------------------------------//
 //--------------------------------------------------------------------------//
 
-User* addUser(char *cpf, char *name, int userType, User* users)
+User addUser(char *cpf, int userType)
 {
+    User user;
+    strcpy(user.cpf, cpf);
+    user.userType = userType;
+    user.isActive = 1;
+    usersResgistereds++;
 
-    if(cpf == NULL)
-    {
-        User* novo = (User*)malloc(sizeof(User));
-        strcpy(novo->cpf, cpf);
-        strcpy(novo->name, name);
-        novo->userType = userType;
-        novo->nUser = NULL;
-
-        return novo;
-    }
-    else
-    {
-        users->nUser = addUser(cpf, name, userType, users->nUser);
-        return users;
-    }
-
+    return user;           
 }
-
 
 //--------------------------------------------------------------------------//
 //----------------------Função de verificação-------------------------------//
 //--------------------------------------------------------------------------//
 
-int verifyUser(char * cpf, User* users){
-    int user;
+int verifyUser(char * cpf, User users[])
+{
+   int exists = 0;
 
-    if(strstr(cpf, users->cpf)){
-        user = users->userType;
-    }else{
-        user = verifyUser(cpf, users->nUser);
+    for (int i = 0; i < usersResgistereds; i++)
+    {
+        if(strstr(users[i].cpf, cpf) != NULL && users[i].isActive == 1)
+        {
+            exists = 1;
+            break;
+        }
     }
     
-    return user;
+
+   return exists;
 }
 
+//--------------------------------------------------------------------------//
+//-------------------------Função de deleção--------------------------------//
+//--------------------------------------------------------------------------//
+
+User deleteUser(User user){
+    user.isActive = 0;
+    usersResgistereds--;
+
+    return user;
+}
 
 //--------------------------------------------------------------------------//
 //----------------------------Função de Quiz--------------------------------//
@@ -82,62 +87,39 @@ Question addQuestion(Question questions, char *enunciado)
     return questions;
 }
 
-int quiz()
+int printQuestion(Question question)
 {
-    Question perguntas[10];
+    char listQuestion[3][150];
+    int alt2, alt3;
+    int correct = rand()%3;
 
-    //char alternativa_usuario[150];
+    strcpy(listQuestion[correct],question.alternativa_correta);
 
-    int alternativa_usuario;
+    do{
+        alt2 = rand()%3;
+    }while(alt2 == correct);
+    do
+    {
+        alt3 = rand()%3;
+    } while (alt3 == correct || alt3 == alt2);
+    
+    strcpy(listQuestion[alt2],question.alternativa2);
+    strcpy(listQuestion[alt3],question.alternativa3);
 
+
+    printf("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
+    printf("Questao\n");
+    printf("%s\n",question.enunciado);
     printf("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
     printf("alternativas: \n");
-    printf("1- %s\n",perguntas[0].alternativa_correta);
-    printf("2- %s\n",perguntas[0].alternativa2);
-    printf("3- %s\n",perguntas[0].alternativa3);
+    printf("1- %s\n",listQuestion[0]);
+    printf("2- %s\n",listQuestion[1]);
+    printf("3- %s\n",listQuestion[2]);
     printf("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
 
-    scanf("%i",&alternativa_usuario);
-    getchar();
-    switch (alternativa_usuario){
-        case 1:
-            printf("acertou");
-            break;
-        default:
-            printf("errou");
-            break;
-    }
-    /*
-    printf("digite a sua alternativa\n");
-    scanf("%i",&alternativa_usuario);
-    getchar();
+    return correct;
+} 
 
-    switch (alternativa_usuario){
-        case 1:
-            printf("acertou");
-            break;
-        default:
-            printf("errou");
-            break;
-    };
-        
-    
-    TESTE UNITARIO
-    printf("escreva a sua alternativa\n");
-    scanf("%[^\n]",alternativa_usuario);
-    getchar();
-    
-
-    if (strcmp(alternativa_usuario, perguntas[0].alternativa_correta) == 0){
-        printf("booooa\n");
-    }
-    else
-    {
-        printf("eroooou\n");
-    }*/
-    return 0;
-
-}
 
 //--------------------------------------------------------------------------//
 //-----------------------Função de Teleatendimento--------------------------//
@@ -151,7 +133,6 @@ void IniciarChamada()
 
 void FecharChamada()
 {
-
     printf("chamada finalizada\n");
 }  
 
@@ -187,8 +168,6 @@ int DiminuirAudio(int volume)   //Trocar no fluxograma essa função de void por
 
 int LigarCam(int camera)   //Testado // camera ja irá vir desligada( camera = OFF)
 {
-    
-
     if (camera == 1)
     {
         printf("ON \n");
@@ -200,13 +179,12 @@ int LigarCam(int camera)   //Testado // camera ja irá vir desligada( camera = O
         printf("Camera ja ligada...\n");
         
     }
-    return camera;
 
+    return camera;
 }
 
 int DesligaCam(int camera)  //Testado
 {
-
     if (camera == 2)
     {
         printf("OFF\n");
@@ -219,19 +197,6 @@ int DesligaCam(int camera)  //Testado
     }
     
     return camera;
-}
-
-int EnviarMsg()     //testado
-{
-    int num;
-    printf("Digite o numero da pergunta\n");
-    printf("1 - estou com sintomas gripais qual medicamento eu devo tomar ?\n");
-    printf("2 - Como devo tomar o  medicamento XXX ?\n");
-    printf("3 - Nao estou mais sentido os sintomas que estava antes, posso parar de tomar o remedio ?\n");
-    scanf("%i",&num);
-    getchar();
-    return num;
-
 }
 
 void ReceberMsg(int num)    //Testado
@@ -249,6 +214,21 @@ void ReceberMsg(int num)    //Testado
         break;
     }
 }
+
+void EnviarMsg()     //testado
+{
+    int num;
+
+    printf("Digite o numero da pergunta\n");
+    printf("1 - estou com sintomas gripais qual medicamento eu devo tomar ?\n");
+    printf("2 - Como devo tomar o  medicamento XXX ?\n");
+    printf("3 - Nao estou mais sentido os sintomas que estava antes, posso parar de tomar o remedio ?\n");
+    scanf("%i",&num);
+    getchar();
+
+    ReceberMsg(num);
+}
+
 
 int ConectarMic(int mic)    //ja testado
 {

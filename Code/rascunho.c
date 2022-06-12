@@ -11,26 +11,37 @@ typedef struct Question
     char alternativa3[150];
 }Question;
 
-
-
 int printQuestion(Question question)
 {
     char listQuestion[3][150];
+    int alt2, alt3;
     int correct = rand()%3;
-    strcpy(listQuestion[correct][150],question.alternativa_correta);
+
+    strcpy(listQuestion[correct],question.alternativa_correta);
+
+    do{
+        alt2 = rand()%3;
+    }while(alt2 == correct);
+    do
+    {
+        alt3 = rand()%3;
+    } while (alt3 == correct || alt3 == alt2);
+    
+    strcpy(listQuestion[alt2],question.alternativa2);
+    strcpy(listQuestion[alt3],question.alternativa3);
+
 
     printf("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
     printf("Questao\n");
     printf("%s\n",question.enunciado);
     printf("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
     printf("alternativas: \n");
-    printf("1- %s\n",question.alternativa_correta);
-    printf("2- %s\n",question.alternativa2);
-    printf("3- %s\n",question.alternativa3);
+    printf("1- %s\n",listQuestion[0]);
+    printf("2- %s\n",listQuestion[1]);
+    printf("3- %s\n",listQuestion[2]);
     printf("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
 
-
-
+    return correct;
 } 
 
 Question addQuestion(Question questions, char *enunciado)
@@ -42,15 +53,26 @@ Question addQuestion(Question questions, char *enunciado)
     
     return questions;
 }
+
 int main()
 {
     srand(time(NULL));
 
     Question perguntas[2];
 
-    perguntas[0] = addQuestion(perguntas[0], "propolis");
-    printQuestion(perguntas[0]);
+    int userAnswer;
 
-    
+    perguntas[0] = addQuestion(perguntas[0], "propolis");
+    int answer = printQuestion(perguntas[0]);
+
+    scanf("%d", &userAnswer);
+    getchar();
+
+    if (answer == (userAnswer-1))
+    {
+       printf("Voce acertou!");
+    }else{
+        printf("Voce errou!");
+    }
 }
 
