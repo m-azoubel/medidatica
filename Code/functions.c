@@ -11,7 +11,7 @@ typedef struct Users
     char name[50];
     char cpf[11];
     int userType;
-    struct Users* nUser;
+    struct Users* nUser;    
 }User;
 
 //--------------------------------------------------------------------------//
