@@ -117,7 +117,7 @@ int printQuestion(Question question)
     printf("3- %s\n",listQuestion[2]);
     printf("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
 
-    return correct;
+    return correct+1;
 } 
 
 
