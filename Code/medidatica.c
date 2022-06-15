@@ -76,18 +76,17 @@ typedef struct Question
 }Question;
 
 
-
 Question addQuestion(Question questions, char *enunciado)
 {
     strcpy(questions.enunciado,enunciado);
-    strcpy(questions.alternativa_correta,"pipipi popopo");
-    strcpy(questions.alternativa2,"pipipi popopo2");
-    strcpy(questions.alternativa3,"pipipi popopo3");
+    strcpy(questions.alternativa_correta,"resposta correta");
+    strcpy(questions.alternativa2,"resposta incorreta 1");
+    strcpy(questions.alternativa3,"resposta incorreta 2");
     
     return questions;
 }
 
-int printQuestion(Question question)
+int printQuestion(Question question)  
 {
     char listQuestion[3][150];
     int alt2, alt3;
@@ -118,7 +117,28 @@ int printQuestion(Question question)
     printf("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
 
     return correct+1;
-} 
+}
+
+int answerQuestion(Question question, int answer)
+{
+    int resposta;
+
+    printf("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
+    printf("Sua resposta:\n");
+    scanf("%d",&resposta);
+    getchar();
+    printf("%d\n",resposta);
+    if (resposta == answer)
+    {
+        printf("Correto!!!\n");
+    }
+    else
+    {
+        printf("Incorreto\n");
+    }
+    printf("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
+    return 0;
+}
 
 
 //--------------------------------------------------------------------------//
@@ -146,7 +166,7 @@ void DesconectarAudio()
     printf("desconectando audio\n");
 }
 
-int AumentarAudio(int volume)   //Trocar no fluxograma essa função de void por int
+int AumentarAudio(int volume)                 //Trocar no fluxograma essa função de void por int
 {
     if (volume<=90)
     {
@@ -155,7 +175,7 @@ int AumentarAudio(int volume)   //Trocar no fluxograma essa função de void por
     return volume;  
 }
 
-int DiminuirAudio(int volume)   //Trocar no fluxograma essa função de void por int
+int DiminuirAudio(int volume)                 //Trocar no fluxograma essa função de void por int
 {
     if (volume>=10)
     {
@@ -166,7 +186,7 @@ int DiminuirAudio(int volume)   //Trocar no fluxograma essa função de void por
     return volume;
 }
 
-int LigarCam(int camera)   //Testado // camera ja irá vir desligada( camera = OFF)
+int LigarCam(int camera)                      //Testado // camera ja irá vir desligada( camera = OFF)
 {
     if (camera == 1)
     {
@@ -183,7 +203,7 @@ int LigarCam(int camera)   //Testado // camera ja irá vir desligada( camera = O
     return camera;
 }
 
-int DesligaCam(int camera)  //Testado
+int DesligaCam(int camera)                                                                  //Testado
 {
     if (camera == 2)
     {
@@ -199,23 +219,23 @@ int DesligaCam(int camera)  //Testado
     return camera;
 }
 
-void ReceberMsg(int num)    //Testado
+void ReceberMsg(int num)                                                                    //Testado
 {
     switch (num)
     {
     case 1:
-        printf("O medicamento XXX e o recomendavel a voce");
+        printf("O medicamento XXX e o recomendavel a voce\n\n");
         break;
     case 2:
-        printf("Você deve toma-lo em 8 em 8 horas por 5 dias");
+        printf("Voce deve toma-lo em 8 em 8 horas por 5 dias\n\n");
         break;
     case 3:
-        printf("Não e recomendavel pelos medicos faze-lo\n");
+        printf("Nao e recomendavel pelos medicos faze-lo\n\n");
         break;
     }
 }
 
-void EnviarMsg()     //testado
+void EnviarMsg()                              //testado
 {
     int num;
 
@@ -230,7 +250,7 @@ void EnviarMsg()     //testado
 }
 
 
-int ConectarMic(int mic)    //ja testado
+int ConectarMic(int mic)                      //ja testado
 {
 
 
@@ -246,7 +266,7 @@ int ConectarMic(int mic)    //ja testado
     return mic;
 }
 
-int DesconectarMic(int mic)     //Ja testado
+int DesconectarMic(int mic)                   //Ja testado
 {
 
     if (mic == 2)
