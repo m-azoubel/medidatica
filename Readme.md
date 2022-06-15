@@ -4,3 +4,5 @@
   </a>
 </p>
 
+<p align="center">Aplicação educativa para conscientização do uso irrestrito de antibióticos!</p>
+<img src="https://img.shields.io/github/license/m-azoubel/medidatica?style=plastic">
