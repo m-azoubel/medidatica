@@ -1,16 +1,21 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
+#include <stdio.h> //padrão
+#include <stdlib.h> //necessário para o rand
+#include <time.h> //necessário para o rand
 #include <string.h> //necessário para strcpy
 
 //UserTypes: 1 - User | 2 - Adm | 3 - Farma
 
-//Funções necessárias
+//--------------------------------------------------------------------------//
+//--------------------------Funções do Usuário------------------------------//
+//--------------------------------------------------------------------------//
+//--------------------------Struct de Usuário-------------------------------//
+//--------------------------------------------------------------------------// 
+
 typedef struct Users
 {
     char cpf[11];
     int userType;
-    int isActive;
+    int isActive; //utilizado para deleção lógica
 }User;
 
 int usersResgistereds = 0;
@@ -63,9 +68,10 @@ User deleteUser(User user){
 }
 
 //--------------------------------------------------------------------------//
-//----------------------------Função de Quiz--------------------------------//
+//---------------------------Funções do Quiz--------------------------------//
 //--------------------------------------------------------------------------//
-
+//----------------------------Struct do Quiz--------------------------------//
+//--------------------------------------------------------------------------//
 
 typedef struct Question
 {
@@ -75,6 +81,9 @@ typedef struct Question
     char alternativa3[150];
 }Question;
 
+//--------------------------------------------------------------------------//
+//---------------------------Função de Adição-------------------------------//
+//--------------------------------------------------------------------------//
 
 Question addQuestion(Question questions, char *enunciado)
 {
@@ -86,63 +95,69 @@ Question addQuestion(Question questions, char *enunciado)
     return questions;
 }
 
-int printQuestion(Question question)  
+//--------------------------------------------------------------------------//
+//-------------------------Função de Impressão------------------------------//
+//--------------------------------------------------------------------------//
+
+void printQuestion(Question question)  
 {
-    char listQuestion[3][150];
-    int alt2, alt3;
-    int correct = rand()%3;
+    char answers[3][150];
+    int correctAlt, secondAlt, thirdAlt;
 
-    strcpy(listQuestion[correct],question.alternativa_correta);
-
+    correctAlt = rand()%3;
     do{
-        alt2 = rand()%3;
-    }while(alt2 == correct);
+        secondAlt = rand()%3;
+    }while(secondAlt == correctAlt);
     do
     {
-        alt3 = rand()%3;
-    } while (alt3 == correct || alt3 == alt2);
-    
-    strcpy(listQuestion[alt2],question.alternativa2);
-    strcpy(listQuestion[alt3],question.alternativa3);
+        thirdAlt = rand()%3;
+    } while (thirdAlt == correctAlt || thirdAlt == secondAlt);
 
+    strcpy(answers[correctAlt],question.alternativa_correta);
+    strcpy(answers[secondAlt],question.alternativa2);
+    strcpy(answers[thirdAlt],question.alternativa3);
+    
 
     printf("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
     printf("Questao\n");
     printf("%s\n",question.enunciado);
     printf("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
     printf("alternativas: \n");
-    printf("1- %s\n",listQuestion[0]);
-    printf("2- %s\n",listQuestion[1]);
-    printf("3- %s\n",listQuestion[2]);
+    printf("1- %s\n",answers[0]);
+    printf("2- %s\n",answers[1]);
+    printf("3- %s\n",answers[2]);
     printf("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
 
-    return correct+1;
+    answerQuestion(question, correctAlt);
 }
 
-int answerQuestion(Question question, int answer)
+//--------------------------------------------------------------------------//
+//--------------------------Função de Resposta------------------------------//
+//--------------------------------------------------------------------------//
+
+void answerQuestion(Question question, int answer)
 {
-    int resposta;
+    int userAnswer;
 
     printf("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
     printf("Sua resposta:\n");
-    scanf("%d",&resposta);
+    scanf("%d",&userAnswer);
     getchar();
-    printf("%d\n",resposta);
-    if (resposta == answer)
+    if (userAnswer == answer)
     {
         printf("Correto!!!\n");
     }
     else
     {
         printf("Incorreto\n");
+        printf("A resposta correta é: %d\n", answer);
     }
     printf("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
-    return 0;
 }
 
 
 //--------------------------------------------------------------------------//
-//-----------------------Função de Teleatendimento--------------------------//
+//---------------------Funções de Tele-atendimento--------------------------//
 //--------------------------------------------------------------------------//
 
 
