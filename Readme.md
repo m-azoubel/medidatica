@@ -39,7 +39,8 @@
  <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/60006560?s=400&u=dfa0eea78bcaf5c063ce718a7f29549a022010e2&v=4" width="100px;" alt=""/>
  <br />
  <sub><b>Davi Aleixo</b></sub></a>
-<br />
+
+
 Código por: Artur Teodoro, Davi Aleixo, Gabriel Grinspun e Marcela Azoubel.<br />
 Protótipo por: Ana Luiza Motta, Larissa Pires e Marília Adrielle.
 
