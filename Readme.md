@@ -40,8 +40,6 @@
  <br />
  <sub><b>Davi Aleixo</b></sub></a>
 
-
-
 Código por: Artur Teodoro, Davi Aleixo, Gabriel Grinspun e Marcela Azoubel.<br />
 Protótipo por: Ana Luiza Motta, Larissa Pires e Marília Adrielle.
 
