@@ -41,9 +41,10 @@
  <sub><b>Davi Aleixo</b></sub></a>
 
 
-Feito por: Davi Aleixo!
+Código por: Artur Teodoro, Davi Aleixo, Gabriel Grinspun e Marcela Azoubel.
+Protótipo por: Ana Luiza Motta, Larissa Pires e Marília Adrielle.
 
 Contatos:
 
 [![Linkedin Badge](https://img.shields.io/badge/-Aleixo-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/davi-aleixo-548b55b8/)](https://www.linkedin.com/in/davi-aleixo-548b55b8/) 
-[![Gmail Badge](https://img.shields.io/badge/-dac2@cesar.school-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:dac2@cesar.school)](mailto:dac2@cesar.school)
+[![Gmail Badge](https://img.shields.io/badge/-dac2@cesar.school-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:dac2@cesar.school)](mailto:dac2@cesar.school) || 
