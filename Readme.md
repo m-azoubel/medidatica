@@ -5,7 +5,9 @@
 <h2 align="center">Aplicação educativa para conscientização do uso irrestrito de antibióticos!</h2>
 
 <p align="center">
-    <img src="https://img.shields.io/github/license/m-azoubel/medidatica?style=for-the-badge">
+    <a href="https://www.apache.org/licenses/LICENSE-2.0">
+        <img src="https://img.shields.io/github/license/m-azoubel/medidatica?style=for-the-badge">
+    </a>
     <a href="\Code">
         <img src="https://img.shields.io/badge/Language-C-brightgreen?style=for-the-badge">
     </a>
